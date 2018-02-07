@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>  
+	<!--<link rel="stylesheet" href="foundation.min.css"> -->
+	<link rel="stylesheet" href="app.css"> 
+	<script src="https://unpkg.com/vue"></script> 
+</head>
+<body >  
+	<div id="app" style=" font-family:Ringfont "> 
+
+		<audio ref="audioGen"  controls="controls"  style="width: 80px;">
+			<source src="Path of Exile Soundtrack (Full).mp3"  type="audio/mp3">
+			</audio>
+			<audio ref="audioVictory"  controls="controls"  style="width: 80px; display:none;">
+				<source src="Path of Exile Soundtrack (Full).mp3"  type="audio/mp3">
+				</audio>
+				<audio ref="audioDefeat"  controls="controls"  style="width: 80px; display:none;">
+					<source src="defeatSound.wav"  type="audio/mp3">
+					</audio>
+
+					<transition name="fade">
+						<section class="row" v-if="!isGameRunning"  key="startPage">
+							<div style="margin-left: 40px;margin-right:40px;">
+								<h1 class="text-center" style="font-size: 58px;">{{startTitle}}</h1>
+								<span style="white-space: pre-wrap; word-wrap: normal; font-size: 38px; ">{{startText}}</span  > 
+									<p  style="margin-top: 20px;margin-bottom: 20px; font-size: 20px; " > Character Name:<input v-model="playerCustomName" placeholder="Uatella"></p>
+									<button class="center" @click="startNewGame">Start</button>
+								</div>
+							</section>
+							<section class="row" v-else key="gamePage"> 
+								<section class="row">
+									<div class="small-12 columns">
+										<button style="float:left" @click="quitGame">Try Again</button>	
+										<h1 class="text-center">{{playerData.Name}}</h1>
+										<div class="healthbar">
+											<span style="float:left">Patience: </span>
+											<div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
+											:style="{width: playerData.Sabir+'%'}">
+											{{playerData.Sabir}}
+										</div>
+									</div>			
+								</div>
+							</section>
+							<section  class="row" style="min-width: 90%" > 
+								<template v-if="isGameConcluded==0"> 
+									<div id="adventureScreen" v-if="isAdventuring" >
+										<img :src="tileMapImage" style="display: table; margin: 0 auto;max-width:90%; max-height:90%;" alt="Land of Release" @click="startEncounter(playerData.CurrentTile)" > 
+									</div>
+									<div id="fightScreen" v-else >
+										<template v-if="!isFightConcluded">
+											<div class="player"> 
+												<h2 class="text-center">{{playerData.Name}}</h2>
+												<img class="fightImage" :src="playerData.ImageSource">
+												<ul style="float:right">  
+													<li v-for="(capability,i) in playerData.Capabilities">
+														<button class="attackButton" @click="useAttack(i)">{{capability.Type}}</button>
+													</li>
+												</ul>
+											</div>   
+											<img class="vs" src="vs.png">  
+											<div class="enemy"  >
+												<h2 class="text-center">{{enemyData.Name}}</h2>
+												<img class="fightImage" :src="enemyData.ImageSource"> 
+											</div>  
+
+										</template>
+										<template v-else>
+											<section class="row" >
+												<div class="conclusion"  >
+													<img class="fightImage center" :src="fightConclusion.ImageSource" > 
+													<h2 class="text-center">{{fightConclusion.Outcome}}</h2>
+												</div>
+											</section>
+											<section class="row" >
+												<div class="conclusion"  >
+													<span style="white-space: pre-wrap; word-wrap: normal;">{{fightConclusion.OutcomeDetail}}</span  >
+														<br><br> 
+														<span v-if="foundItemText!=null" style="white-space: pre-wrap; word-wrap: normal;">{{foundItemText}}</span  >
+															<img v-if="foundItemImageSrc!=null" style="margin-top:100px;margin-bottom:50px;" class="fightImage center" :src="foundItemImageSrc" > 
+															<section class="row" >
+																<button class="center" @click="continueAfterConclusion()">Continue...</button> 
+															</section> 
+														</div>
+													</section>
+												</template>
+											</div>
+										</template>
+										<template v-else>
+											<section class="row" >
+												<div class="conclusion"  >
+													<h2 class="text-center">{{gameConclusion.Outcome}}</h2>
+													<img class="conclusionImage center" :src="gameConclusion.ImageSource"> 
+												</div>
+											</section>
+											<section class="row" > 
+												<span class="text-center" style="white-space: pre-wrap; word-wrap: normal;">{{gameConclusion.OutcomeDetail}}</span>  
+											</section>
+										</template>
+
+									</section>
+								</section> 
+							</transition>
+						</div>
+						<script src="app.js"> 
+						</script> 
+					</body>
+					</html>

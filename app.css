@@ -1,0 +1,100 @@
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}  
+html { 
+    background: url('start.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+@font-face { font-family: Ringfont; src: url('Ringfont.ttf'); } 
+
+.text-center {
+    text-align: center;
+}
+.center {
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+}
+.fightImage{
+    width:200px;
+    height:200px; 
+}
+.conclusionImage{
+    width:500px;
+    height:500px; 
+}
+
+.healthbar {
+    width: 80%;
+    height: 40px;
+    background-color: #eee;
+    margin: auto;
+    transition: width 500ms;
+}
+.grid{
+	width:100px;
+	height:100px;
+	background-color: #aaffb0; 
+    display: table;
+    margin: 0 auto;
+}
+.conclusion{
+    width:600px;
+    height:200px; 
+    display: table;
+    margin: 0 auto;
+} 
+
+.vs{   margin-left: 20vw;
+    width:150px;
+    height:150px; 
+}
+
+.enemy{
+    width:450px;
+    height:250px; 
+    float: right;
+}
+
+.player{
+    width:450px;
+    height:250px; 
+    float: left;
+}  
+
+.attackButton{
+    padding: 5px;
+    font-size: 14px;
+    margin: 5px;
+    background: #d17804;
+} 
+
+#fightScreen{ 
+    margin-top:100px;
+}
+
+#adventureScreen{ 
+    margin-top:100px;
+}
+
+button {
+    font-size: 20px;
+    background: #aaffb0;
+    padding: 12px;
+    box-shadow: 0 1px 1px black;
+    margin: 10px;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
